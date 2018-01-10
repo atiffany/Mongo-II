@@ -1,3 +1,6 @@
+const express = require('express');
+const mongoose = require('mongoose');
+
 const fs = require('fs');
 
 let savedPosts = null;
@@ -15,6 +18,12 @@ const readPosts = () => {
 
 const populatePosts = () => {
   // TODO: implement this
+  const allPosts = readPosts();
+  const promises = allPosts.map(post => new Post(post).save());
+  return Promise.all(promises);
 };
+
+populatePosts();
+
 
 module.exports = { readPosts, populatePosts };
