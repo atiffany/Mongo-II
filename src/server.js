@@ -17,7 +17,7 @@ server.get('/users', (req, res) => {
       res.status(200).json(posts);
     })
     .catch((error) => {
-      res.status(401).json({ error: 'Cannot find users' });
+      res.status(422).json({ error: 'Cannot find users' });
     });
 });
 
@@ -31,11 +31,11 @@ server.get('/accepted-answer/:soID', (req, res) => {
           res.status(200).json(answer);
         })
         .catch((error) => {
-          res.status(401).json({ error: 'No answer found' });
+          res.status(422).json({ error: 'No answer found' });
         });
     })
     .catch((error) => {
-      res.status(401).json({ error: 'No question found' });
+      res.status(422).json({ error: 'No question found' });
     });
 });
 
