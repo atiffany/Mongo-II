@@ -54,6 +54,15 @@ server.get('/top-answer/:soID', (req, res) => {
     });
 });
 
-// get.server()
+// GET popular jquery questions
+server.get('/popular-jquery-questions', (req, res) => {
+  Post.find({ parentID: null, tags: 'jquery', $or: [{ score: { $gt: 5000 } }, { 'user.repuation': { $gt: 200000 } }] })
+    .then((post) => {
+      res.status(200).json(post);
+    })
+    .catch((error) => {
+      res.status(422).json(error);
+    });
+});
 
 module.exports = { server };
